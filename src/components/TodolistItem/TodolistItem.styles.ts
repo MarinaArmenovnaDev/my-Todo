@@ -1,4 +1,4 @@
-import { SxProps } from '@mui/material'
+import type {SxProps} from "@mui/material";
 
 export const containerSx: SxProps = {
     display: 'flex',

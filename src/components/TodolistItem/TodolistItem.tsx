@@ -1,4 +1,4 @@
-import type {FilterValue, Task, Todolist} from "../../App.tsx";
+import type {FilterValue, Task, Todolist} from "../../app/App.tsx";
 import {type ChangeEvent, useState} from "react";
 import Button from '@mui/material/Button'
 import {CreateItemForm} from "../CreateItemForm/CreateItemForm.tsx";

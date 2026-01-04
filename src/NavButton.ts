@@ -1,18 +1,14 @@
 import {styled} from "@mui/material";
 import Button from "@mui/material/Button";
 
-type Props = {
-    background?: string
-}
-
-export const NavButton = styled(Button)<Props>(({ background, theme }) => ({
+export const NavButton = styled(Button)(({ theme}) => ({
     minWidth: '110px',
     fontWeight: 'bold',
-    boxShadow: `0 0 0 2px ${theme.palette.primary.dark}, 2px 2px 0 0 ${theme.palette.primary.dark}`,
-    borderRadius: '2px',
+    border: " 1px solid #fff",
+    borderRadius: '5px',
     textTransform: 'capitalize',
     margin: '0 10px',
     padding: '8px 24px',
     color: theme.palette.primary.contrastText,
-    background: background || theme.palette.primary.light,
+    backgroundColor: "transparent",
 }))
