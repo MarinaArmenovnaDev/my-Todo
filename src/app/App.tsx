@@ -3,9 +3,6 @@ import {TodolistItem} from "../components/TodolistItem/TodolistItem.tsx";
 import {CreateItemForm} from "../components/CreateItemForm/CreateItemForm.tsx";
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
-import {createTheme, ThemeProvider} from "@mui/material";
-import CssBaseline from '@mui/material/CssBaseline'
 import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
@@ -18,7 +15,6 @@ import {useAppSelector} from "../common/hooks/useAppSelector.ts";
 import {selectTasks} from "../model/tasks-selectors.ts";
 import {selectTodolists} from "../model/todolists-selectors.ts";
 import {Header} from "../components/Header/Header.tsx";
-import {useState} from "react";
 
 export type Task = {
     id: string
@@ -36,24 +32,7 @@ export type TasksState = {
     [key: string]: Task[]
 }
 
-export type ThemeMode = 'dark' | 'light'
-
-
 function App() {
-    const [themeMode, setThemeMode] = useState<ThemeMode>('light')
-
-    const theme = createTheme({
-        palette: {
-            mode: themeMode,
-            primary: {
-                main: '#808080',
-            },
-        },
-    })
-
-    const changeMode = () => {
-        setThemeMode(themeMode === 'light' ? 'dark' : 'light')
-    }
     const todolists = useAppSelector(selectTodolists)
     const tasks = useAppSelector(selectTasks)
     const dispatch = useAppDispatch()
@@ -95,51 +74,42 @@ function App() {
 
     return (
         <div className="app">
-            <ThemeProvider theme={theme}>
-                <CssBaseline/>
-                <Header changeMode={changeMode} themeMode={themeMode}/>
-                <Container maxWidth={'lg'}>
-                    <Grid container>
-                        <CreateItemForm onCreateItem={createTodolist}/>
-                    </Grid>
+            <Header/>
+            <Container maxWidth={'lg'}>
+                <Grid container>
+                    <CreateItemForm onCreateItem={createTodolist}/>
+                </Grid>
 
-                    <Grid container spacing={4}>
+                <Grid container spacing={4}>
+                    {todolists?.map(todolist => {
+                        const todolistTasks = tasks[todolist.id]
+                        let filteredTasks = todolistTasks
+                        if (todolist.filter === "active") {
+                            filteredTasks = todolistTasks.filter(task => !task.isDone)
+                        }
+                        if (todolist.filter === "completed") {
+                            filteredTasks = todolistTasks.filter(task => task.isDone)
+                        }
+                        return (
+                            <Grid key={todolist.id}>
+                                <TodolistItem
+                                    key={todolist.id}
+                                    tasks={filteredTasks}
+                                    todolist={todolist}
+                                    deleteTask={deleteTask}
+                                    createTask={createTask}
+                                    changeFilter={changeFilter}
+                                    changeTaskStatus={changeTaskStatus}
+                                    deleteTodolist={deleteTodolist}
+                                    changeTaskTitle={changeTaskTitle}
+                                    changeTodolistTitle={changeTodolistTitle}
 
-
-                        {todolists?.map(todolist => {
-                            const todolistTasks = tasks[todolist.id]
-                            let filteredTasks = todolistTasks
-                            if (todolist.filter === "active") {
-                                filteredTasks = todolistTasks.filter(task => !task.isDone)
-                            }
-                            if (todolist.filter === "completed") {
-                                filteredTasks = todolistTasks.filter(task => task.isDone)
-                            }
-                            return (
-                                <Grid key={todolist.id}>
-                                    <Paper sx={{p: '0 20px 20px 20px'}} >
-                                        <TodolistItem
-                                            key={todolist.id}
-                                            tasks={filteredTasks}
-                                            todolist={todolist}
-                                            deleteTask={deleteTask}
-                                            createTask={createTask}
-                                            changeFilter={changeFilter}
-                                            changeTaskStatus={changeTaskStatus}
-                                            deleteTodolist={deleteTodolist}
-                                            changeTaskTitle={changeTaskTitle}
-                                            changeTodolistTitle={changeTodolistTitle}
-
-                                        />
-                                    </Paper>
-
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </Container>
-            </ThemeProvider>
-
+                                />
+                            </Grid>
+                        )
+                    })}
+                </Grid>
+            </Container>
         </div>
     )
 }

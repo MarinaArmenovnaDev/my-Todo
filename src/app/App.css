@@ -1,7 +1,31 @@
 .app {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   width: 100vw;
+  background-image: url("https://img.freepik.com/premium-photo/abstract-background-folded-pink-blue-paper_1278706-65406.jpg?semt=ais_hybrid&w=740&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.9) 0%,
+          rgba(255, 255, 255, 0.7) 50%,
+          rgba(255, 255, 255, 0.85) 100%
+  );
+  z-index: -1;
 }
 
 .container {

@@ -1,14 +1,14 @@
 import {styled} from "@mui/material";
 import Button from "@mui/material/Button";
 
-export const NavButton = styled(Button)(({ theme}) => ({
+export const NavButton = styled(Button)(() => ({
     minWidth: '110px',
     fontWeight: 'bold',
-    border: " 1px solid #fff",
+    border: " 1px solid #787878",
     borderRadius: '5px',
     textTransform: 'capitalize',
     margin: '0 10px',
     padding: '8px 24px',
-    color: theme.palette.primary.contrastText,
+    color: "#434343",
     backgroundColor: "transparent",
 }))
