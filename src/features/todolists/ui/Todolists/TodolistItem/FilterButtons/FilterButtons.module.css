@@ -1,0 +1,64 @@
+
+
+
+.filterButtonsContainer {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+
+.filterButton {
+    min-width: 80px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(120, 119, 119, 0.1);
+    background-color: transparent;
+    padding: 0.5rem ;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.filterButton:hover {
+    border-color: rgba(120, 119, 119, 0.3);
+    background-color: rgba(120, 119, 119, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filterButton:active {
+    box-shadow: none;
+}
+
+.filterButton.active {
+    border-color: #787878;
+    background-color: rgba(120, 119, 119, 0.1);
+    color: #333;
+}
+
+
+/* Конкретные цвета для каждого фильтра */
+.filterButton:nth-child(1):hover,
+.filterButton:nth-child(1).active {
+    border-color: #666;
+    color: #333;
+    background-color: rgba(102, 102, 102, 0.08);
+}
+
+.filterButton:nth-child(2):hover,
+.filterButton:nth-child(2).active {
+    border-color: #2196F3;
+    color: #2196F3;
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+.filterButton:nth-child(3):hover,
+.filterButton:nth-child(3).active {
+    border-color: #4CAF50;
+    color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.08);
+}

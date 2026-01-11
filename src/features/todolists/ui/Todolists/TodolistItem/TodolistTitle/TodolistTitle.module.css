@@ -1,0 +1,26 @@
+.todolistTitle {
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.deleteTodolistButton {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    border: none;
+    background-color: transparent;
+}
+
+.deleteTodolistButton:hover {
+    color:#787878;
+    transform: scale(1.08);
+}

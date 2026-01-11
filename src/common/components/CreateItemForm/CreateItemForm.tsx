@@ -1,7 +1,8 @@
 import {type ChangeEvent, type KeyboardEvent, useState} from "react";
 import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
-import AddBoxIcon from '@mui/icons-material/AddBox'
+import {CircleFadingPlus} from "lucide-react";
+import {Button} from "@/common/components/Button/Button.tsx";
+import s from "./CreateItemForm.module.css"
 
 type Props ={
     onCreateItem: (title: string) => void
@@ -32,7 +33,7 @@ export const CreateItemForm = ({onCreateItem}: Props) => {
         }
     }
     return (
-        <>
+        <div className={s.container}>
             <TextField label={'Enter a title'}
                        variant={'outlined'}
                        className={error ? 'error' : ''}
@@ -42,9 +43,9 @@ export const CreateItemForm = ({onCreateItem}: Props) => {
                        helperText={error}
                        onChange={changeItemTitleHandler}
                        onKeyDown={createItemOnEnterHandler}/>
-            <IconButton onClick={createItemHandler} color={'primary'}>
-                <AddBoxIcon />
-            </IconButton>
-        </>
+            <Button onClick={createItemHandler} className={s.addButton}>
+                <CircleFadingPlus />
+            </Button>
+        </div>
     )
 }

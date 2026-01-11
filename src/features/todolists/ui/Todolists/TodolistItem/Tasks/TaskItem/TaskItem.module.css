@@ -1,0 +1,84 @@
+
+.listItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.listItem:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: rgba(120, 119, 119, 0.2);
+}
+
+.listItem > div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+.listItem input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid #d1d5db;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.listItem input[type="checkbox"]:checked {
+    background-color: #787878;
+    border-color: #787878;
+}
+
+
+.listItem input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.listItem input[type="checkbox"]:hover {
+    border-color: #787878;
+}
+
+.listItem button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #9ca3af;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.listItem:hover button {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.listItem button:hover {
+    background-color: rgba(120, 119, 119, 0.2);
+}

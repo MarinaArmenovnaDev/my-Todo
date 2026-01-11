@@ -1,6 +1,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import s from "./Header.module.css"
-import {Button} from "../Button/Button.tsx";
+import {Button} from "@/common/components/Button/Button.tsx";
 
 
 export const Header = () => {
