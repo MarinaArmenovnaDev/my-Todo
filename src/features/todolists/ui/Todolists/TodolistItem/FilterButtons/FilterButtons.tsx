@@ -1,11 +1,14 @@
 import s from "./FilterButtons.module.css";
 import {Button} from "@/common/components/Button/Button.tsx";
-import type {FilterValue, Todolist} from "@/app/App.tsx";
-import {changeTodolistFilterAC} from "@/features/todolists/model/todolists-reducer.ts";
+import {
+    changeTodolistFilterAC,
+    type DomainTodolist,
+    type FilterValue
+} from "@/features/todolists/model/todolists-slice.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 
 type Props = {
-    todolist: Todolist
+    todolist: DomainTodolist
 }
 
 export const FilterButtons = ({todolist: {id, filter}}: Props) => {

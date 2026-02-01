@@ -1,14 +1,14 @@
-import type {Todolist} from "@/app/App.tsx";
 import {CreateItemForm} from "@/common/components/CreateItemForm/CreateItemForm.tsx";
 import s from "./TodolistItem.module.css"
-import {createTaskAC} from "@/features/todolists/model/tasks-reducer.ts";
+import {createTaskAC} from "@/features/todolists/model/tasks-slice.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {TodolistTitle} from "@/features/todolists/ui/Todolists/TodolistItem/TodolistTitle/TodolistTitle.tsx";
 import {Tasks} from "@/features/todolists/ui/Todolists/TodolistItem/Tasks/Tasks.tsx";
 import {FilterButtons} from "@/features/todolists/ui/Todolists/TodolistItem/FilterButtons/FilterButtons.tsx";
+import type {DomainTodolist} from "@/features/todolists/model/todolists-slice.ts";
 
 type Props = {
-    todolist: Todolist
+    todolist: DomainTodolist
 }
 
 export const TodolistItem = ({todolist: {id, filter, title},}: Props) => {

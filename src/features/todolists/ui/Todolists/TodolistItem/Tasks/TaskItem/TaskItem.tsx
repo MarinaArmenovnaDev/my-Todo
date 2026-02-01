@@ -1,7 +1,7 @@
 import {EditableSpan} from "@/common/components/EditableSpan/EditableSpan.tsx";
 import {Button} from "@/common/components/Button/Button.tsx";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC} from "@/features/todolists/model/tasks-reducer.ts";
+import {changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC} from "@/features/todolists/model/tasks-slice.ts";
 import type {ChangeEvent} from "react";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import type {Task} from "@/app/App.tsx";

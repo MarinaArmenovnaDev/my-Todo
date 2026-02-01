@@ -1,11 +1,12 @@
 import s from "./Tasks.module.css";
-import type {Task, Todolist} from "@/app/App.tsx";
+import type {Task} from "@/app/App.tsx";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
-import {selectTasks} from "@/features/todolists/model/tasks-selectors.ts";
 import {TaskItem} from "@/features/todolists/ui/Todolists/TodolistItem/Tasks/TaskItem/TaskItem.tsx";
+import type {DomainTodolist} from "@/features/todolists/model/todolists-slice.ts";
+import {selectTasks} from "@/features/todolists/model/tasks-slice.ts";
 
 type Props = {
-    todolist: Todolist
+    todolist: DomainTodolist
 }
 
 export const Tasks = ({todolist: {id, filter}}: Props) => {
@@ -22,10 +23,10 @@ export const Tasks = ({todolist: {id, filter}}: Props) => {
     }
     return (
         <>
-            {filteredTasks.length === 0 ?
+            {filteredTasks?.length === 0 ?
                 (<p>no tasks</p>) : (
                     <ul className={s.taskList}>
-                        {filteredTasks.map((task: Task) => {
+                        {filteredTasks?.map((task: Task) => {
                             return (
                                 <TaskItem task={task} todolistId={id}/>
                             );
