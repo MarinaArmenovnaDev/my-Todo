@@ -21,6 +21,8 @@
 }
 
 .deleteTodolistButton:hover {
-    color:#787878;
     transform: scale(1.08);
+}
+.deleteTodolistButton:disabled {
+    cursor: not-allowed;
 }

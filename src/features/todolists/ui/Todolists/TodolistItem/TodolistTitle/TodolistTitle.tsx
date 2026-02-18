@@ -1,19 +1,18 @@
 import s from "./TodolistTitle.module.css";
-import {EditableSpan} from "@/common/components/EditableSpan/EditableSpan.tsx";
-import {Button} from "@/common/components/Button/Button.tsx";
 import {Trash} from "lucide-react";
 import {
     changeTodolistTitleTC,
     deleteTodolistTC,
     type DomainTodolist
 } from "@/features/todolists/model/todolists-slice.ts";
-import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppDispatch} from "@/common/hooks";
+import {Button, EditableSpan} from "@/common/components";
 
 type Props = {
     todolist: DomainTodolist
 }
 
-export const TodolistTitle = ({todolist: {id, title}}: Props) => {
+export const TodolistTitle = ({todolist: {id, title, entityStatus}}: Props) => {
 
     const dispatch = useAppDispatch()
 
@@ -27,9 +26,9 @@ export const TodolistTitle = ({todolist: {id, title}}: Props) => {
     return (
         <div className={s.container}>
             <h2 className={s.todolistTitle}>
-                <EditableSpan value={title} onChange={changeTodolistTitle}/>
+                <EditableSpan value={title} onChange={changeTodolistTitle} disabled={entityStatus === "loading"} />
             </h2>
-            <Button onClick={deleteTodolist} className={s.deleteTodolistButton}>
+            <Button onClick={deleteTodolist} className={s.deleteTodolistButton} disabled={entityStatus === "loading"}>
                 <Trash/>
             </Button>
         </div>

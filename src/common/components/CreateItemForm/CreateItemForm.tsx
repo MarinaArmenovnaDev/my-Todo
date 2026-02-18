@@ -6,9 +6,10 @@ import s from "./CreateItemForm.module.css"
 
 type Props ={
     onCreateItem: (title: string) => void
+    disabled?: boolean
 }
 
-export const CreateItemForm = ({onCreateItem}: Props) => {
+export const CreateItemForm = ({onCreateItem, disabled}: Props) => {
     const [title, setTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
@@ -42,8 +43,10 @@ export const CreateItemForm = ({onCreateItem}: Props) => {
                        error={!!error}
                        helperText={error}
                        onChange={changeItemTitleHandler}
-                       onKeyDown={createItemOnEnterHandler}/>
-            <Button onClick={createItemHandler} className={s.addButton}>
+                       onKeyDown={createItemOnEnterHandler}
+                       disabled={disabled}
+            />
+            <Button onClick={createItemHandler} className={s.addButton} disabled={disabled}>
                 <CircleFadingPlus />
             </Button>
         </div>

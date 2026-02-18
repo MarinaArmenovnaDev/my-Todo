@@ -5,7 +5,7 @@ import {
     type DomainTodolist,
     type FilterValue
 } from "@/features/todolists/model/todolists-slice.ts";
-import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppDispatch} from "@/common/hooks";
 
 type Props = {
     todolist: DomainTodolist

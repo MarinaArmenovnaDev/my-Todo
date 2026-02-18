@@ -5,17 +5,22 @@ export const appSlice = createSlice({
     name: "app",
     initialState: {
         status: 'idle' as RequestStatus,
+        error: null as string | null,
     },
     selectors: {
-        selectStatus: (state) => state.status
+        selectStatus: (state) => state.status,
+        selectAppError: (state) => state.error
     },
     reducers: (create) => ({
         setAppStatusAC: create.reducer<{status: RequestStatus}>((state, action)=>{
             state.status = action.payload.status
+        }),
+        setAppErrorAC: create.reducer<{error: null | string}>((state, action)=>{
+            state.error = action.payload.error
         })
     }),
 })
 
-export const { selectStatus } = appSlice.selectors
-export const { setAppStatusAC } = appSlice.actions
+export const { selectStatus, selectAppError } = appSlice.selectors
+export const { setAppStatusAC, setAppErrorAC } = appSlice.actions
 export const appReducer = appSlice.reducer

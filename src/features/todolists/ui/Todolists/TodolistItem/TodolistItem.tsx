@@ -1,7 +1,7 @@
-import {CreateItemForm} from "@/common/components/CreateItemForm/CreateItemForm.tsx";
+import {CreateItemForm} from "@/common/components";
 import s from "./TodolistItem.module.css"
 import {createTaskTC} from "@/features/todolists/model/tasks-slice.ts";
-import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppDispatch} from "@/common/hooks";
 import {TodolistTitle} from "@/features/todolists/ui/Todolists/TodolistItem/TodolistTitle/TodolistTitle.tsx";
 import {Tasks} from "@/features/todolists/ui/Todolists/TodolistItem/Tasks/Tasks.tsx";
 import {FilterButtons} from "@/features/todolists/ui/Todolists/TodolistItem/FilterButtons/FilterButtons.tsx";
@@ -22,7 +22,7 @@ export const TodolistItem = ({todolist}: Props) => {
     return (
         <div className={s.todolist}>
             <TodolistTitle todolist={todolist}/>
-            <CreateItemForm onCreateItem={createTask}/>
+            <CreateItemForm onCreateItem={createTask} disabled={todolist.entityStatus === "loading"}/>
             <Tasks todolist={todolist}/>
             <FilterButtons todolist={todolist}/>
         </div>

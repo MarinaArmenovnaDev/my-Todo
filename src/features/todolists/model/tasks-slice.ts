@@ -1,9 +1,10 @@
 import {createTodolistTC, deleteTodolistTC} from "@/features/todolists/model/todolists-slice.ts"
-import {createAppSlice} from "@/common/utils";
+import {createAppSlice, handleServerAppError, handleServerNetworkError} from "@/common/utils";
 import {tasksApi} from "@/features/todolists/api/tasksApi.ts";
 import type {DomainTask, UpdateTaskModel} from "@/features/todolists/api/tasksApi.types.ts";
 import type {RootState} from "@/app/store.ts";
 import {setAppStatusAC} from "@/app/app-slice.ts";
+import {ResultCode} from "@/common/enums";
 
 export const tasksSlice = createAppSlice({
     name: "tasks",
@@ -40,12 +41,17 @@ export const tasksSlice = createAppSlice({
             deleteTaskTC: create.asyncThunk(async (arg: { todolistId: string, taskId: string }, thunkAPI) => {
                 try {
                     thunkAPI.dispatch(setAppStatusAC({ status: 'loading' }))
-                    await tasksApi.deleteTask(arg)
-                    thunkAPI.dispatch(setAppStatusAC({ status: 'succeeded' }))
-                    return arg
-                } catch (e) {
-                    thunkAPI.dispatch(setAppStatusAC({ status: 'failed' }))
-                    return thunkAPI.rejectWithValue(e)
+                    const res = await tasksApi.deleteTask(arg)
+                    if(res.data.resultCode === ResultCode.Success){
+                        thunkAPI.dispatch(setAppStatusAC({ status: 'succeeded' }))
+                        return arg
+                    }else{
+                        handleServerAppError(res.data, thunkAPI.dispatch)
+                        return thunkAPI.rejectWithValue(null)
+                    }
+                } catch (error: any) {
+                   handleServerNetworkError(error, thunkAPI.dispatch)
+                    return thunkAPI.rejectWithValue(null)
                 }
             }, {
                 fulfilled: (state, action) => {
@@ -59,11 +65,16 @@ export const tasksSlice = createAppSlice({
                 try {
                     thunkAPI.dispatch(setAppStatusAC({ status: 'loading' }))
                     const res = await tasksApi.createTask(arg)
-                    thunkAPI.dispatch(setAppStatusAC({ status: 'succeeded' }))
-                    return {task: res.data.data.item}
-                } catch (e) {
-                    thunkAPI.dispatch(setAppStatusAC({ status: 'failed' }))
-                    return thunkAPI.rejectWithValue(e)
+                    if(res.data.resultCode === ResultCode.Success){
+                        thunkAPI.dispatch(setAppStatusAC({ status: 'succeeded' }))
+                        return {task: res.data.data.item}
+                    }else{
+                        handleServerAppError(res.data, thunkAPI.dispatch)
+                        return thunkAPI.rejectWithValue(null)
+                    }
+                } catch (error: any) {
+                    handleServerNetworkError(error, thunkAPI.dispatch)
+                    return thunkAPI.rejectWithValue(null)
                 }
             }, {
                 fulfilled: (state, action) => {
@@ -95,11 +106,16 @@ export const tasksSlice = createAppSlice({
                 try {
                     thunkAPI.dispatch(setAppStatusAC({ status: 'loading' }))
                     const res = await tasksApi.updateTask({todolistId, taskId, model})
-                    thunkAPI.dispatch(setAppStatusAC({ status: 'succeeded' }))
-                    return {task: res.data.data.item}
-                } catch (e) {
-                    thunkAPI.dispatch(setAppStatusAC({ status: 'failed' }))
-                    return thunkAPI.rejectWithValue(e)
+                    if(res.data.resultCode === ResultCode.Success){
+                        thunkAPI.dispatch(setAppStatusAC({ status: 'succeeded' }))
+                        return {task: res.data.data.item}
+                    }else{
+                        handleServerAppError(res.data, thunkAPI.dispatch)
+                        return thunkAPI.rejectWithValue(null)
+                    }
+                } catch (error: any) {
+                    handleServerNetworkError(error, thunkAPI.dispatch)
+                    return thunkAPI.rejectWithValue(null)
                 }
             }, {
                 fulfilled: (state, action) => {

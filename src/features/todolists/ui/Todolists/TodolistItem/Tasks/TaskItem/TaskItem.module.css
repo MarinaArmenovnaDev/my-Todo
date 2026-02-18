@@ -57,6 +57,9 @@
 .listItem input[type="checkbox"]:hover {
     border-color: #787878;
 }
+.listItem input[type="checkbox"]:disabled {
+   cursor: not-allowed;
+}
 
 .listItem button {
     background: transparent;
@@ -81,4 +84,8 @@
 
 .listItem button:hover {
     background-color: rgba(120, 119, 119, 0.2);
+}
+
+.listItem button:disabled{
+    cursor: not-allowed;
 }

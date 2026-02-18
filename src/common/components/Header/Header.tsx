@@ -2,7 +2,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import s from "./Header.module.css"
 import {Button} from "@/common/components/Button/Button.tsx";
 import {LinearProgress} from "@mui/material";
-import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
+import {useAppSelector} from "@/common/hooks";
 import {selectStatus} from "@/app/app-slice.ts";
 
 
